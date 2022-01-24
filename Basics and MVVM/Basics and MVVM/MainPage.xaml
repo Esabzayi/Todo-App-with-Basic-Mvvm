@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Basics_and_MVVM.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+    xmlns:local="clr-namespace:Basics_and_MVVM">
+
+    <!--View model iska zarya access hogya bs-->
+    <ContentPage.BindingContext>
+        <local:TodoListViewModel/>
+        
+    </ContentPage.BindingContext>
+    
+    <!--one after other in stack-->
+    <StackLayout>
+
+        <!--Header Top--> 
+        <Frame
+            BackgroundColor="#2196F3"
+            CornerRadius="0"
+            Padding="24">
+            <Label
+                FontSize="36"
+                HorizontalTextAlignment="Center"
+                Text="TODO APP "
+                TextColor="White" />
+        </Frame>
+
+        <!--Entry or Text box-->
+        <!--TextChange Detect Change-->
+        <!--Completed = Keydown Event Enter Press-->
+        <!--TextChanged="txt1_TextChanged" 
+            Completed="txt1_KeyDown"-->
+        <Entry
+            x:Name="txt1"
+            Placeholder="Enter a todo"
+            Text="{Binding NewTodoInputValue}"
+            FontSize="Large"
+            ReturnCommand="{Binding AddTodoCommand}"
+            />
+
+        
+        
+        <!--Display a List Ustad ya binding me kam ai ga ab isko ViewModel ka sath bind krde gy iska 
+        liye uper Content page me add kry gy view model ka link type taky hum usko access kr saky
+        aur isme Bindinga ha wo hum use kr sak ry hai qk humy uper isko bind kia hoa ha -->
+
+        <ListView x:Name="TodoList" ItemsSource="{Binding TodoItems}" ItemTapped="LstProducts_ItemTapped">
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        
+                        <FlexLayout JustifyContent="SpaceBetween" AlignItems="Center" Padding="20,2">
+
+                            <ContentView>
+                                <FlexLayout AlignItems="Center">
+                                    <input:CheckBox IsChecked ="{Binding Complete}"/>
+                                    <Label Text="{Binding TodoText}" FontSize="Medium" Margin="20,0"  />
+                                </FlexLayout>
+                            </ContentView>
+                                  
+                              
+                         
+                           
+                            <ImageButton 
+                                Source="delete.png"
+                                
+                                Command="{Binding Path=BindingContext.RemoveTodoCommand , Source={x:Reference TodoList}}"
+                                CommandParameter="{Binding .}"/>
+                        </FlexLayout>
+                       
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+    </StackLayout>
+
+</ContentPage>
