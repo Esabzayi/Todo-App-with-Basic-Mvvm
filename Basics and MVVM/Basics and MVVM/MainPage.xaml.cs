@@ -18,8 +18,8 @@ namespace Basics_and_MVVM
 
         public async void LstProducts_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var  selectedProduct = (TodoItems)e.Item;
-            await DisplayAlert("You selected", selectedProduct.TodoText, "Buy", "Cancel");
+            //var  selectedProduct = (TodoItems)e.Item;
+            //await DisplayAlert("You selected", selectedProduct.TodoText, "Buy", "Cancel");
         }
     }
 }

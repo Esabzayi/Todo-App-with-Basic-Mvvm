@@ -27,7 +27,9 @@ namespace Basics_and_MVVM
         }
         // jab enter hoga to Add todoCommand us ko 
         public ICommand AddTodoCommand => new Command(AddTodoItem);
+
         public  string NewTodoInputValue { get; set; }
+
         void AddTodoItem()
         {
             TodoItems.Add(new TodoItems(NewTodoInputValue, false));
